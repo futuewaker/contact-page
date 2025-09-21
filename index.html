@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>正在跳转...</title>
+
+  <!-- 兜底：3 秒后强制跳转到 HTTPS（小红书等内置浏览器更稳） -->
+  <meta http-equiv="refresh" content="3;url=https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" />
+
+  <style>
+    body { font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; line-height: 1.6; }
+    .email { color: #007aff; font-weight: 700; word-break: break-all; }
+    .hint { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <!-- 提示信息：若内置浏览器拦截 data:，用户仍可点“备用链接” -->
+  <h1>正在跳转以显示邮箱</h1>
+  <p class="hint">若未自动跳转，请点击下方备用链接。</p>
+  <p>
+    <!-- 备用可见链接（一定可见） -->
+    <a class="email" href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" rel="noopener">备用链接：查看邮箱 caiyuxuanjcgs@126.com</a>
+  </p>
+  <p class="hint">
+    或直接写邮件：
+    <a href="mailto:caiyuxuanjcgs@126.com">mailto:caiyuxuanjcgs@126.com</a>
+  </p>
+
+  <script>
+    // 目标邮箱
+    const email = 'caiyuxuanjcgs@126.com';
+
+    // 1) 优先尝试跳转到 data: 页面，直接在新网页里显示邮箱（某些内置浏览器可能拦截）
+    const html = `<!doctype html><html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的邮箱</title>
+<style>
+  body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; padding: 24px; line-height: 1.6; }
+  .email { font-size: 22px; font-weight: 700; color: #007aff; word-break: break-all; }
+</style>
+</head><body>
+  <h1>我的邮箱</h1>
+  <p class="email">${email}</p>
+  <p><a href="mailto:${email}">一键写邮件</a></p>
+</body></html>`;
+
+    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+
+    // 2) HTTPS 兜底（通用性最强，能在页面上清晰看到邮箱）
+    const httpsFallback = 'https://www.baidu.com/s?wd=' + encodeURIComponent(email);
+
+    // 先尝试 data:，若 1.2s 内未成功，自动回退到 HTTPS
+    try {
+      const t = setTimeout(() => location.replace(httpsFallback), 1200);
+      location.replace(dataUrl);
+    } catch (e) {
+      location.replace(httpsFallback);
+    }
+  </script>
+
+  <noscript>
+    您的浏览器未启用 JavaScript，点击
+    <a href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com">这里</a>
+    查看邮箱。
+  </noscript>
+</body>
+</html><!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>正在跳转...</title>
+
+  <!-- 兜底：3 秒后强制跳转到 HTTPS（小红书等内置浏览器更稳） -->
+  <meta http-equiv="refresh" content="3;url=https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" />
+
+  <style>
+    body { font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; line-height: 1.6; }
+    .email { color: #007aff; font-weight: 700; word-break: break-all; }
+    .hint { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <!-- 提示信息：若内置浏览器拦截 data:，用户仍可点“备用链接” -->
+  <h1>正在跳转以显示邮箱</h1>
+  <p class="hint">若未自动跳转，请点击下方备用链接。</p>
+  <p>
+    <!-- 备用可见链接（一定可见） -->
+    <a class="email" href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" rel="noopener">备用链接：查看邮箱 caiyuxuanjcgs@126.com</a>
+  </p>
+  <p class="hint">
+    或直接写邮件：
+    <a href="mailto:caiyuxuanjcgs@126.com">mailto:caiyuxuanjcgs@126.com</a>
+  </p>
+
+  <script>
+    // 目标邮箱
+    const email = 'caiyuxuanjcgs@126.com';
+
+    // 1) 优先尝试跳转到 data: 页面，直接在新网页里显示邮箱（某些内置浏览器可能拦截）
+    const html = `<!doctype html><html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的邮箱</title>
+<style>
+  body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; padding: 24px; line-height: 1.6; }
+  .email { font-size: 22px; font-weight: 700; color: #007aff; word-break: break-all; }
+</style>
+</head><body>
+  <h1>我的邮箱</h1>
+  <p class="email">${email}</p>
+  <p><a href="mailto:${email}">一键写邮件</a></p>
+</body></html>`;
+
+    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+
+    // 2) HTTPS 兜底（通用性最强，能在页面上清晰看到邮箱）
+    const httpsFallback = 'https://www.baidu.com/s?wd=' + encodeURIComponent(email);
+
+    // 先尝试 data:，若 1.2s 内未成功，自动回退到 HTTPS
+    try {
+      const t = setTimeout(() => location.replace(httpsFallback), 1200);
+      location.replace(dataUrl);
+    } catch (e) {
+      location.replace(httpsFallback);
+    }
+  </script>
+
+  <noscript>
+    您的浏览器未启用 JavaScript，点击
+    <a href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com">这里</a>
+    查看邮箱。
+  </noscript>
+</body>
+</html>
