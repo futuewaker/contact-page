@@ -1,137 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>正在跳转...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系方式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- 兜底：3 秒后强制跳转到 HTTPS（小红书等内置浏览器更稳） -->
-  <meta http-equiv="refresh" content="3;url=https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" />
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-  <style>
-    body { font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; line-height: 1.6; }
-    .email { color: #007aff; font-weight: 700; word-break: break-all; }
-    .hint { color: #666; font-size: 14px; }
-  </style>
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .email-section {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .email-section:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .email-label {
+            color: #4a5568;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .email-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .email-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2d3748;
+            word-break: break-all;
+            flex: 1;
+            text-align: left;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            min-width: 70px;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .footer-text {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        /* 复制成功提示 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            
+            .email-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .email-text {
+                text-align: center;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- 提示信息：若内置浏览器拦截 data:，用户仍可点“备用链接” -->
-  <h1>正在跳转以显示邮箱</h1>
-  <p class="hint">若未自动跳转，请点击下方备用链接。</p>
-  <p>
-    <!-- 备用可见链接（一定可见） -->
-    <a class="email" href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" rel="noopener">备用链接：查看邮箱 caiyuxuanjcgs@126.com</a>
-  </p>
-  <p class="hint">
-    或直接写邮件：
-    <a href="mailto:caiyuxuanjcgs@126.com">mailto:caiyuxuanjcgs@126.com</a>
-  </p>
+    <div class="card">
+        <!-- 头像 -->
+        <div class="avatar">📧</div>
+        
+        <!-- 标题 -->
+        <h1>联系我</h1>
+        <p class="subtitle">欢迎通过邮箱与我取得联系</p>
+        
+        <!-- 邮箱区域 -->
+        <div class="email-section">
+            <div class="email-label">邮箱地址</div>
+            <div class="email-container">
+                <span class="email-text" id="emailText">caiyuxuanjcgs@126.com</span>
+                <button class="copy-btn" onclick="copyEmail()" id="copyBtn">
+                    <span id="copyIcon">📋</span>
+                    <span id="copyText">复制</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 底部文字 -->
+        <p class="footer-text">
+            点击复制按钮即可复制邮箱地址<br>
+            期待与您的沟通交流！
+        </p>
+    </div>
 
-  <script>
-    // 目标邮箱
-    const email = 'caiyuxuanjcgs@126.com';
+    <!-- 复制成功提示 -->
+    <div class="toast" id="toast">邮箱地址已复制到剪贴板！</div>
 
-    // 1) 优先尝试跳转到 data: 页面，直接在新网页里显示邮箱（某些内置浏览器可能拦截）
-    const html = `<!doctype html><html><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我的邮箱</title>
-<style>
-  body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; padding: 24px; line-height: 1.6; }
-  .email { font-size: 22px; font-weight: 700; color: #007aff; word-break: break-all; }
-</style>
-</head><body>
-  <h1>我的邮箱</h1>
-  <p class="email">${email}</p>
-  <p><a href="mailto:${email}">一键写邮件</a></p>
-</body></html>`;
+    <script>
+        // 复制邮箱功能
+        function copyEmail() {
+            const emailText = document.getElementById('emailText').textContent;
+            const copyBtn = document.getElementById('copyBtn');
+            const copyIcon = document.getElementById('copyIcon');
+            const copyText = document.getElementById('copyText');
+            const toast = document.getElementById('toast');
+            
+            // 使用现代剪贴板 API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(emailText).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(emailText);
+                });
+            } else {
+                // 降级方案
+                fallbackCopyTextToClipboard(emailText);
+            }
+            
+            function showCopySuccess() {
+                // 更新按钮状态
+                copyBtn.classList.add('copied');
+                copyIcon.textContent = '✓';
+                copyText.textContent = '已复制';
+                
+                // 显示提示
+                toast.classList.add('show');
+                
+                // 2秒后恢复按钮状态
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyIcon.textContent = '📋';
+                    copyText.textContent = '复制';
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+            
+            // 降级复制方案
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showCopySuccess();
+                } catch (err) {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请手动选择邮箱地址进行复制');
+                }
+                
+                document.body.removeChild(textArea);
+            }
+        }
 
-    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-
-    // 2) HTTPS 兜底（通用性最强，能在页面上清晰看到邮箱）
-    const httpsFallback = 'https://www.baidu.com/s?wd=' + encodeURIComponent(email);
-
-    // 先尝试 data:，若 1.2s 内未成功，自动回退到 HTTPS
-    try {
-      const t = setTimeout(() => location.replace(httpsFallback), 1200);
-      location.replace(dataUrl);
-    } catch (e) {
-      location.replace(httpsFallback);
-    }
-  </script>
-
-  <noscript>
-    您的浏览器未启用 JavaScript，点击
-    <a href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com">这里</a>
-    查看邮箱。
-  </noscript>
-</body>
-</html><!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>正在跳转...</title>
-
-  <!-- 兜底：3 秒后强制跳转到 HTTPS（小红书等内置浏览器更稳） -->
-  <meta http-equiv="refresh" content="3;url=https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" />
-
-  <style>
-    body { font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; line-height: 1.6; }
-    .email { color: #007aff; font-weight: 700; word-break: break-all; }
-    .hint { color: #666; font-size: 14px; }
-  </style>
-</head>
-<body>
-  <!-- 提示信息：若内置浏览器拦截 data:，用户仍可点“备用链接” -->
-  <h1>正在跳转以显示邮箱</h1>
-  <p class="hint">若未自动跳转，请点击下方备用链接。</p>
-  <p>
-    <!-- 备用可见链接（一定可见） -->
-    <a class="email" href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com" rel="noopener">备用链接：查看邮箱 caiyuxuanjcgs@126.com</a>
-  </p>
-  <p class="hint">
-    或直接写邮件：
-    <a href="mailto:caiyuxuanjcgs@126.com">mailto:caiyuxuanjcgs@126.com</a>
-  </p>
-
-  <script>
-    // 目标邮箱
-    const email = 'caiyuxuanjcgs@126.com';
-
-    // 1) 优先尝试跳转到 data: 页面，直接在新网页里显示邮箱（某些内置浏览器可能拦截）
-    const html = `<!doctype html><html><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我的邮箱</title>
-<style>
-  body { font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; padding: 24px; line-height: 1.6; }
-  .email { font-size: 22px; font-weight: 700; color: #007aff; word-break: break-all; }
-</style>
-</head><body>
-  <h1>我的邮箱</h1>
-  <p class="email">${email}</p>
-  <p><a href="mailto:${email}">一键写邮件</a></p>
-</body></html>`;
-
-    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-
-    // 2) HTTPS 兜底（通用性最强，能在页面上清晰看到邮箱）
-    const httpsFallback = 'https://www.baidu.com/s?wd=' + encodeURIComponent(email);
-
-    // 先尝试 data:，若 1.2s 内未成功，自动回退到 HTTPS
-    try {
-      const t = setTimeout(() => location.replace(httpsFallback), 1200);
-      location.replace(dataUrl);
-    } catch (e) {
-      location.replace(httpsFallback);
-    }
-  </script>
-
-  <noscript>
-    您的浏览器未启用 JavaScript，点击
-    <a href="https://www.baidu.com/s?wd=caiyuxuanjcgs%40126.com">这里</a>
-    查看邮箱。
-  </noscript>
+        // 添加键盘快捷键支持（Ctrl+C 或 Cmd+C）
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+                const selection = window.getSelection().toString();
+                if (!selection) {
+                    e.preventDefault();
+                    copyEmail();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
